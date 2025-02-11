@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Diff</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Japanese-inspired modern design */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f9f9f9, #fff5f5);
+            color: #333;
+            width: 400px;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+
+        .missing {
+            color: #e74c3c;
+            text-decoration: underline;
+        }
+
+        .dark-mode {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: #ecf0f1;
+        }
+
+        .dark-mode textarea {
+            background-color: #34495e;
+            color: #ecf0f1;
+            border-color: #2c3e50;
+        }
+
+        .dark-mode #result {
+            background-color: rgba(44, 62, 80, 0.8);
+            color: #ecf0f1;
+        }
+
+        .dark-mode button {
+            background-color: #3498db;
+        }
+
+        .dark-mode button:hover {
+            background-color: #2980b9;
+        }
+
+        .toggle-dark-mode {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .toggle-dark-mode label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .toggle-dark-mode input {
+            display: none;
+        }
+
+        .toggle-dark-mode .slider {
+            width: 40px;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 20px;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-dark-mode .slider::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+
+        .toggle-dark-mode input:checked + .slider {
+            background-color: #3498db;
+        }
+
+        .toggle-dark-mode input:checked + .slider::before {
+            transform: translateX(20px);
+        }
+    </style>
+</head>
+<body>
+<div class="toggle-dark-mode">
+    <label>
+        <input type="checkbox" id="dark-mode-toggle">
+        <span class="slider"></span>
+        🌙
+    </label>
+</div>
+
+<h1>Text Comparison</h1>
+<textarea id="text1" rows="5" placeholder="Enter first text"></textarea>
+<textarea id="text2" rows="5" placeholder="Enter second text"></textarea>
+<br>
+<button id="compare-button">Compare</button>
+<button id="clear-button">Clear</button>
+<button id="copy-result-button">Copy Result</button>
+<div id="result"></div>
+<div id="character-count"></div>
+
+<script src="diff.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>
