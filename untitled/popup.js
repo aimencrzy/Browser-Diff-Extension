@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.darkMode) {
             document.body.classList.add('dark-mode');
             darkModeToggle.checked = true;
-        }
+        } 
     });
 
     // Save text when it changes
